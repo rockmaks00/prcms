@@ -1,0 +1,16 @@
+__trash
+___trash
+
+/cache
+/config
+/external
+/files
+/grid
+/engine/libs
+/components/admin
+/components/gallery/templates/admin
+/templates/custom/img
+/templates/default/img
+
+.htaccess
+.htpasswd

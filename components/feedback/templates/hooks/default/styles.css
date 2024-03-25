@@ -1,0 +1,46 @@
+.hook-feedback-default form{
+	position: relative;
+	overflow: hidden;
+}
+	html.lt-ie9 .hook-feedback-default .overlay{
+		background: rgb(255,255,255) 50% 50% no-repeat;
+	}
+	.hook-feedback-default .overlay{
+		display: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		text-align:center;
+		background: rgba(255,255,255,0.5) 50% 50% no-repeat;
+	}
+		.hook-feedback-default .overlay:before{
+			content: "";
+			display: inline-block;
+			height: 100%;
+			width: 1px;
+			vertical-align: middle;
+			font-size: 0;
+		}
+		.hook-feedback-default .overlay div{
+			display: none;
+			margin: auto;
+			vertical-align: middle;
+			text-align: center;
+			width: 80%;
+			font-size: 14px;
+		}
+	.hook-feedback-default .overlay.success,
+	.hook-feedback-default .overlay.error,
+	.hook-feedback-default .overlay.sending{
+		display: block;
+		cursor: pointer;
+	}
+	.hook-feedback-default .overlay.sending{
+		background-image: url(ajax-loader.gif);
+	}
+		.hook-feedback-default .overlay.success .success,
+		.hook-feedback-default .overlay.error .error{
+			display: inline-block;
+		}

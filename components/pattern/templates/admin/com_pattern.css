@@ -1,0 +1,11 @@
+#map{
+	position: relative;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+textarea[name="coords"]{
+	margin-bottom: 25px;
+}
+canvas{
+	margin-bottom: 20px;
+}

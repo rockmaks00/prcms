@@ -1,0 +1,29 @@
+html, body{
+	height: 100%;
+}
+body{
+	text-align: center;
+	font-family: Open Sans;
+}
+	.wrapper{
+		height: 600px;
+		position: relative;
+		top: 50%;
+		margin-top: -300px;
+	}
+		.wrapper img{
+			display: block;
+			margin: auto;
+		}
+		.wrapper p{
+			border-radius: 50px;
+			display: inline-block;
+			margin: 30px auto 0;
+			padding: 8px 40px;
+		}
+		.wrapper p.notfound{
+			border: 6px dashed #fec502;
+		}
+		.wrapper p.forbidden{
+			border: 6px dashed #d20202;
+		}

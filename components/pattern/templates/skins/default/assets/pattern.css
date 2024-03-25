@@ -1,0 +1,21 @@
+.com_pattern_default{
+
+}
+	.com_pattern_default .map{
+		position: relative;
+	}
+		.com_pattern_default #canv{
+			position: absolute;
+			top:0;
+			left: 0;
+		}
+		.com_pattern_default .map{
+			display: block;
+		}
+		.com_pattern_default .hover{
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+		}
