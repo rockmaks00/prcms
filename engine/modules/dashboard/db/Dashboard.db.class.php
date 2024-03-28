@@ -1,6 +1,6 @@
 <?
 class ModuleDashboard_DbDashboard extends Db {
-	public function GetDbSize($sUserId) {
+	public function GetDbSize() {
 		$sql = "SHOW TABLE STATUS";
 		$aRows=$this->oDb->Select($sql);
 		
