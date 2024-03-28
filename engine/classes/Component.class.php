@@ -1,5 +1,5 @@
 <?
-abstract class Component extends Object {
+abstract class Component extends EngineObject {
 	
 	protected $aParams=array();
 	// protected $aParamsCurrent=array();

@@ -1,5 +1,5 @@
 <?
-abstract class Hook extends Object {
+abstract class Hook extends EngineObject {
 		
 	public function __construct() {		
 		

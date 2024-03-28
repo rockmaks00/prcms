@@ -1,5 +1,5 @@
 <?
-class Router extends Object {
+class Router extends EngineObject {
 	static public $argv=null;
 	static protected $aArgvNodes=array();
 	static protected $oInstance=null;
@@ -40,11 +40,12 @@ class Router extends Object {
 		self::$aParams=array();
 		self::$argv=array();
 		
-		
-		$r=split("\?", $sUrl, 2);
-		if (!empty($r[0])) $_path_uri=$r[0]."/";
-		if (!empty($r[1])) $_get_vars=$r[1];
-		$rgv=split("/",$_path_uri);
+		$r = preg_split("/\?/", $sUrl, 2);
+		if (!empty($r[0])) {
+			$_path_uri = $r[0] . "/";
+		}
+
+		$rgv = preg_split("/\//", $_path_uri);
 		foreach ($rgv as $rgv1){
 			if ($rgv1 || is_numeric($rgv1)) self::$argv[]=($rgv1);
 		}

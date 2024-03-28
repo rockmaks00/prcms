@@ -1,5 +1,5 @@
 <?
-abstract class Entity extends Object {	
+abstract class Entity extends EngineObject {	
 	protected $_aData=array();
 	public function __construct($aData) {
 		$this->_setData($aData);

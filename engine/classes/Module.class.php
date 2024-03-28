@@ -1,5 +1,5 @@
 <?
-abstract class Module extends Object {
+abstract class Module extends EngineObject {
 	
 	protected $oEngine=null;
 	

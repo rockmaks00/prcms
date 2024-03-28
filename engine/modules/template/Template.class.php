@@ -23,7 +23,7 @@ class ModuleTemplate extends Module {
 			"nodetree"=>"Раздел и подразделы"
 		);
 	
-	public function Init($sTemplate){
+	public function Init(){
 		$this->oDb=Engine::GetDb(__CLASS__);
 		$this->oDb->Install();
 		$this->oSmarty = new Smarty();

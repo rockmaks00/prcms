@@ -1,5 +1,5 @@
 <?
-require_once("engine/classes/Object.class.php");
+require_once("engine/classes/EngineObject.class.php");
 require_once("engine/classes/Module.class.php");
 require_once("engine/classes/Router.class.php");
 require_once("engine/classes/Db.class.php");
@@ -7,7 +7,7 @@ require_once("engine/classes/Entity.class.php");
 require_once("engine/classes/Component.class.php");
 require_once("engine/classes/Hook.class.php");
 
-class Engine extends Object {
+class Engine extends EngineObject {
 	static protected $oInstance=null;
 	protected $aModules=array();
 	protected $aHooks=array();
@@ -15,12 +15,6 @@ class Engine extends Object {
 	static protected $oConnect=null;
 	
 	private function __construct() {
-		if (get_magic_quotes_gpc()) {
-			func_stripslashes($_REQUEST);
-			func_stripslashes($_GET);
-			func_stripslashes($_POST);
-			func_stripslashes($_COOKIE);
-		}
 		foreach (array("files/", "cache/") as $sFolder) {
 			$sFilePath = $sFolder.".htaccess";
 			if( !file_exists($sFilePath) ){
@@ -183,8 +177,8 @@ class Engine extends Object {
 		return $result;
 	}
 }
-function __autoload($sClassName) {
 
+spl_autoload_register(function ($sClassName) {
 	if(preg_match("/^Module(\w+)$/i",$sClassName,$aMatch)) {
 		$sName = ucfirst($aMatch[1]);
 		$sFileClass= 'modules/'.strtolower($sName).'/'.$sName.'.class.php';	
@@ -280,5 +274,5 @@ function __autoload($sClassName) {
 	        return true;
 	    }
 	    return false;
-	}
-}		
+    }
+});
