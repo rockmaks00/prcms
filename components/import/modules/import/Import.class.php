@@ -10,6 +10,11 @@ class ComponentImport_ModuleImport extends Module
 		$this->oDb->Install();
 	}
 
+	public function Select(array $filters = [], ?int $page = 1): array
+	{
+		return $this->oDb->Select($filters, $page);
+	}
+
 	public function Add(ComponentImport_ModuleImport_EntityField $oField)
 	{
 		$iId = $this->oDb->Add($oField);
