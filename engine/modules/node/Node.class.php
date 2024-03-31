@@ -48,7 +48,7 @@ class ModuleNode extends Module {
 		return $data;
 	}
 
-	public function GetNodesTreeByParent($iParentId, $aAvailable) {
+	public function GetNodesTreeByParent($iParentId, $aAvailable = null) {
 		$aNodes=$this->GetNodesByParent($iParentId);
 		$aTree=array();
 		foreach($aNodes as $oNode){

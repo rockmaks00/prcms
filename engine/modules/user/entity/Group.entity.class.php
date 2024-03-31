@@ -16,7 +16,7 @@ class ModuleUser_EntityGroup extends Entity {
 		return "D";
 	}
 
-	public function getAccesses($sMode){
+	public function getAccesses($sMode = null){
 		$aAccesses = $this->_aData['group_acceses'];
 		if( empty($aAccesses) ) $aAccesses = Engine::GetInstance()->User_GetAccessesByGroup( $this->_aData['group_id'] );
 		if( $sMode ){

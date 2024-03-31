@@ -15,7 +15,7 @@ class ModuleNode_DbNode extends Db {
 				`node_seo_keywords` text NOT NULL,
 				`node_createdate` datetime NOT NULL,
 				`node_modifieddate` datetime NOT NULL,
-				`node_childs` int(11) NOT NULL,
+				`node_childs` int(11) NOT NULL DEFAULT '0',
 				`node_image` varchar(250) NOT NULL,
 				`node_description` text NOT NULL,
 				PRIMARY KEY (`node_id`)

@@ -3,13 +3,18 @@
 class ComponentImportAdmin extends Component
 {
 	protected $oNode = null;
+	protected $sAction = null;
+	protected $aParams = [];
+	protected $aLang = [];
+	protected $sTemplatePath = null;
 
 	public function Init()
 	{
 		$this->SetDefaultAction('default');
 		$this->oNode = Router::GetCurrentNode();
-		$this->Template_SetPageTitle($this->oNode->getTitle());
-		$this->Template_AddTitle($this->oNode->getTitle());
+		$this->sAction = Router::GetActionAdmin();
+		$this->aParams = Router::getParams();
+		$this->sTemplatePath = $this->Template_GetHost() . "components/admin/templates/default/";
 	}
 
 	protected function RegisterActions()
@@ -25,6 +30,5 @@ class ComponentImportAdmin extends Component
 
 	protected function ActionSubmit()
 	{
-
 	}
 }
