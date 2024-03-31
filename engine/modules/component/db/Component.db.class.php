@@ -21,7 +21,8 @@ class ModuleComponent_DbComponent extends Db {
 				(4, 'Обратная связь', 'feedback', 1),
 				(5, 'Новости', 'news', 1),
 				(6, 'Галерея изображений', 'gallery', 1),
-				(7, 'Поиск', 'search', 1)";
+				(7, 'Поиск', 'search', 1),
+				(8, 'Импорт CSV', 'import', 1)";
 			$this->oDb->Query($sql);
 		}
 		if( !$this->oDb->CheckTableExists(Config::Get("db.prefix")."components_params") ){

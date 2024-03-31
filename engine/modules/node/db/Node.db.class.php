@@ -25,7 +25,8 @@ class ModuleNode_DbNode extends Db {
 					`node_id`, `node_title`, `node_url`, `node_component`, `node_parent`, `node_active`, `node_sort`, `node_seo_title`, `node_seo_description`, `node_seo_keywords`, `node_createdate`, `node_modifieddate`, `node_childs`, `node_image`, `node_description`
 				) VALUES (1, 'Главная', 'root', 2, 0, 1, 1, '', '', '', '0000-00-00 00:00:00', '2014-04-04 09:44:17', 0, '', ''),
 					(2, 'Административная панель', 'admin', 1, 1, 1, 500, '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '', ''),
-					(3, 'Карта сайта', 'sitemap', 3, 1, 1, 4, '', '', '', '2013-02-17 22:23:51', '2013-10-31 17:09:31', 0, '', '')";
+					(3, 'Карта сайта', 'sitemap', 3, 1, 1, 4, '', '', '', '2013-02-17 22:23:51', '2013-10-31 17:09:31', 0, '', ''),
+					(4, 'Импорт CSV', 'import', 8, 1, 1, 500, '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '', '')";
 			$this->oDb->Query($sql);
 		}
 	}
