@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
     $('#applyFilter').click(function() {
         const dateFilter = $('#dateFilter').val();
         if(dateFilter) {

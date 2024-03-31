@@ -1,30 +1,17 @@
 <?
+require_once('components\import\classes\AbstractImport.class.php');
 
-class ComponentImport extends Component
+class ComponentImport extends AbstractImport
 {
-	protected $oNode = null;
-
-	public function Init()
+	public function Init(): void
 	{
-		$this->SetDefaultAction('default');
-		$this->oNode = Router::GetCurrentNode();
+		parent::Init();
 		$this->Template_SetPageTitle($this->oNode->getTitle());
 		$this->Template_AddTitle($this->oNode->getTitle());
 	}
 
-	protected function RegisterActions()
+	protected function RegisterActions(): void
 	{
 		$this->AddAction('default', 'ActionDefault');
-		$this->AddAction('submit', 'ActionSubmit');
-	}
-
-	protected function ActionDefault()
-	{
-		$this->SetTemplate("default.tpl");
-	}
-
-	protected function ActionSubmit()
-	{
-
 	}
 }

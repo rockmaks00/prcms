@@ -14,11 +14,7 @@
 	<link href="//bootstrap-ru.com/assets/css/bootstrap.css" rel="stylesheet">
 	<link rel='StyleSheet' href='{$aTemplate.path}css/styles.css' type='text/css'>
 	==css==
-	
-	<script type="text/javascript" src="http://www.google.ru/jsapi"></script>
-	<script type="text/javascript">
-		google.load("jquery", "1");
-	</script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	==js==
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
