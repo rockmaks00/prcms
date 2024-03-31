@@ -6,6 +6,37 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		return Config::Get("db.prefix") . "import_csv";
 	}
 
+	protected function Pagination(string $sql, int $page): string
+	{
+		$pageSize = AbstractImport::PAGE_SIZE;
+			if (!empty($pageSize)) {
+			$sql .= " LIMIT {$pageSize}";
+
+			if (!empty($page)) {
+				$offset = ($page - 1) * $pageSize;
+				$sql .= " OFFSET {$offset}";
+			}
+		}
+
+		return $sql;
+	}
+
+	protected function BuildSelect(string $select, array $filters): array
+	{
+		$sTableName = self::tableName();
+		$aliases = [];
+
+		if (isset($filters['creation_date'])) {
+			$where = "WHERE `creation_date` = ?";
+			$aliases[] = $filters['creation_date'];
+		}
+
+		return [
+			'sql' => "SELECT {$select} FROM `{$sTableName}` {$where}",
+			'aliases' => $aliases,
+		];
+	}
+
 	public function Install()
 	{
 		$sTableName = self::tableName();
@@ -27,19 +58,22 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		}
 	}
 
-	public function Select(array $filters, ?int $page): array
+	public function Count(array $filters): int
 	{
-		$sTableName = self::tableName();
-		$aliases = [];
+		$data = $this->BuildSelect("COUNT(id) AS count", $filters);
+		$sql = $data['sql'];
+		$aliases = $data['aliases'];
 
-		if (isset($filters['creation_date'])) {
-			$where = "WHERE `creation_date` = ?";
-			$aliases[] = $filters['creation_date'];
-		}
+		$result = $this->oDb->SelectRow($sql, ...$aliases);
 
-		// добавить пагинацию отдельной функцией
+		return $result['count'];
+	}
 
-		$sql = "SELECT * FROM `{$sTableName}` {$where}";
+	public function Select(int $page, array $filters): array
+	{
+		$data = $this->BuildSelect("*", $filters);
+		$sql = $this->Pagination($data['sql'], $page);
+		$aliases = $data['aliases'];
 
 		return $this->oDb->Select($sql, ...$aliases);
 	}

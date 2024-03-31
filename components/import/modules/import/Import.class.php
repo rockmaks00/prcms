@@ -10,9 +10,14 @@ class ComponentImport_ModuleImport extends Module
 		$this->oDb->Install();
 	}
 
-	public function Select(array $filters = [], ?int $page = 1): array
+	public function Count(array $filters): int
 	{
-		return $this->oDb->Select($filters, $page);
+		return $this->oDb->Count($filters);
+	}
+
+	public function Select(int $page, array $filters): array
+	{
+		return $this->oDb->Select($page, $filters);
 	}
 
 	public function Add(ComponentImport_ModuleImport_EntityField $oField)
