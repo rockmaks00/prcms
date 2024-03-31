@@ -3,14 +3,14 @@ class ComponentImport_ModuleImport_DbImport extends Db
 {
 	protected static function tableName(): string
 	{
-		return Config::Get("db.prefix")."import_csv";
+		return Config::Get("db.prefix") . "import_csv";
 	}
 
 	public function Install()
 	{
 		$sTableName = self::tableName();
 
-		if(!$this->oDb->CheckTableExists($sTableName) ){
+		if (!$this->oDb->CheckTableExists($sTableName)) {
 			$sql = "CREATE TABLE IF NOT EXISTS `{$sTableName}` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
                 `group` varchar(250) NOT NULL,
@@ -27,6 +27,23 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		}
 	}
 
+	public function Select(array $filters, ?int $page): array
+	{
+		$sTableName = self::tableName();
+		$aliases = [];
+
+		if (isset($filters['creation_date'])) {
+			$where = "WHERE `creation_date` = ?";
+			$aliases[] = $filters['creation_date'];
+		}
+
+		// добавить пагинацию отдельной функцией
+
+		$sql = "SELECT * FROM `{$sTableName}` {$where}";
+
+		return $this->oDb->Select($sql, ...$aliases);
+	}
+
 	public function Add(ComponentImport_ModuleImport_EntityField $oField)
 	{
 		$sTableName = self::tableName();
@@ -38,12 +55,13 @@ class ComponentImport_ModuleImport_DbImport extends Db
 				`planned_time`,
 				`amount`,
 				`creation_date`,
-				`link`,
+				`link`
 			) 
 			VALUES(?, ?, ?, ?, ?, ?, ?)
 		";
 
-		return $this->oDb->Query($sql, 
+		return $this->oDb->Query(
+			$sql,
 			$oField->getGroup(),
 			$oField->getTask(),
 			$oField->getSpentTime(),
@@ -69,7 +87,8 @@ class ComponentImport_ModuleImport_DbImport extends Db
 			WHERE id=?
 		";
 
-		return $this->oDb->Query($sql, 
+		return $this->oDb->Query(
+			$sql,
 			$oField->getGroup(),
 			$oField->getTask(),
 			$oField->getSpentTime(),
@@ -79,17 +98,17 @@ class ComponentImport_ModuleImport_DbImport extends Db
 			$oField->getLink()
 		);
 	}
-	
-	public function Delete($iId): bool
+
+	public function Delete(int $id): bool
 	{
 		$sTableName = self::tableName();
 
 		$sql = "DELETE FROM `{$sTableName}` WHERE field_id=?";
-		
-		if ($this->oDb->Query($sql, $iId)) {
+
+		if ($this->oDb->Query($sql, $id)) {
 			return true;
 		}
-		
+
 		return false;
 	}
-}	
+}

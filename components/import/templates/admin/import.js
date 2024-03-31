@@ -1,7 +1,16 @@
 $(function () {
-    $('#uploadCsv').click(function (e) {
-        e.preventDefault();
+    $('#applyFilter').click(function() {
+        const dateFilter = $('#dateFilter').val();
+        if(dateFilter) {
+            window.location.href = window.location.pathname + '?creation_date=' + dateFilter;
+        }
+    });
 
+    $('#clearFilter').click(function() {
+        window.location.href = window.location.pathname;
+    });
+
+    $('#uploadCsv').click(function () {
         const $input = $('input[name="uploadCsv"]');
         const file = $input[0].files[0];
 

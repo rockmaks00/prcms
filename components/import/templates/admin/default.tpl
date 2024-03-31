@@ -2,12 +2,19 @@
 
 <div class="container">
     <div class="row-fluid">
-        <input type="file" name="uploadCsv" data-set="{$aTemplate.node_url}upload/">
-        <button type="button" class="btn" id="uploadCsv">Импорт CSV</button>
+        <div class="span10">
+            <input type="file" name="uploadCsv" data-set="{$aTemplate.node_url}upload/">
+            <button type="button" class="btn" id="uploadCsv">Импорт CSV</button>
+            <hr>
+        </div>
     </div>
     <div class="row-fluid">
         <label for="dateFilter">Фильтр по дате создания:</label>
-        <input type="date" id="dateFilter">
+        <input type="date" id="dateFilter" {if $aFilters['creation_date']}value="{$aFilters['creation_date']}"{/if}>
+    </div>
+    <div class="row-fluid" style="margin-bottom: 5px;">
+        <button type="button" class="btn" id="applyFilter">Применить</button>
+        <button type="button" class="btn" id="clearFilter">Сбросить</button>
     </div>
     <div class="row-fluid">
         <div class="span10">
