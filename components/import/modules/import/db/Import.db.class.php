@@ -145,4 +145,12 @@ class ComponentImport_ModuleImport_DbImport extends Db
 
 		return false;
 	}
+
+	public function Get(int $id)
+	{
+		$sTableName = self::tableName();
+		$sql = "SELECT * FROM {$sTableName} WHERE id=?";
+
+		return $this->oDb->SelectRow($sql, $id);
+	}
 }

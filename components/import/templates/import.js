@@ -37,4 +37,10 @@ $(document).ready(function () {
             alert('Загружаемый файл отсутствует');
         }
     });
+
+    $('tr[name="editable"]').click(function () {
+        const id = $(this).attr('data-id');
+
+        window.location.href = window.location.pathname + 'edit/' + id;
+    });
 });

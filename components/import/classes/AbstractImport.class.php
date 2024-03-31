@@ -16,6 +16,7 @@ abstract class AbstractImport extends Component
     protected function ActionDefault(): void
 	{
 		$params = $_REQUEST;
+		$this->Template_Assign("aFilters", $params);
 
 		if (isset($params['page'])) {
 			$iPage = $params['page'];
@@ -30,9 +31,11 @@ abstract class AbstractImport extends Component
 		$this->Template_Assign("iCount", $iCount);
 		$this->Template_Assign("iPageSize", static::PAGE_SIZE);
 		$this->Template_Assign("iPage", $iPage);
-		$this->Template_Assign("aFilters", $_REQUEST);
 		$this->Template_Assign("aFields", $aFields);
+
+		$this->Template_AddCss($this->Template_GetHost() . "components/import/templates/import.css");
 		$this->Template_AddJs($this->Template_GetHost() . "components/import/templates/import.js");
+
 		$this->SetTemplate("default.tpl");
 	}
 }

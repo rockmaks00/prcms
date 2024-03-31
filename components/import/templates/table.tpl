@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 {foreach from=$aFields item="item"}
-                    <tr>
+                    <tr {if $bEditable} data-id="{$item['id']}" name="editable" {/if}>
                         <td>{$item['id']}</td>
                         <td>{$item['group']}</td>
                         <td>{$item['task']}</td>

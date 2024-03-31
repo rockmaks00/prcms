@@ -35,8 +35,13 @@ class ComponentImport_ModuleImport extends Module
 		return $this->oDb->Update($oField);
 	}
 
-	public function Delete($iId)
+	public function Delete(int $id)
 	{
-		return $this->oDb->Delete($iId);
+		return $this->oDb->Delete($id);
+	}
+
+	public function Get(int $id)
+	{
+		return $this->oDb->Get($id);
 	}
 }
