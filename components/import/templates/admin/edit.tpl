@@ -3,58 +3,58 @@
 <div class="container">
     <div class="row-fluid">
         <div class="span10">
-            <form action="{$sUrl}/update" id="fieldForm" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <form id="fieldForm" class="form-horizontal">
                 <div class="control-group">
-                    <label class="control-label" for="id">ID</label>
+                    <label class="control-label" for="field_id">ID</label>
                     <div class="controls">
-                        <input type="text" id="id" name="id" readonly value="{$aField['id']}">
+                        <input type="text" id="field_id" name="field_id" readonly value="{$aField['field_id']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="group">Группа</label>
+                    <label class="control-label" for="field_group">Группа</label>
                     <div class="controls">
-                        <input type="text" id="group" name="group" value="{$aField['group']}">
+                        <input type="text" id="field_group" name="field_group" value="{$aField['field_group']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="task">Задача</label>
+                    <label class="control-label" for="field_task">Задача</label>
                     <div class="controls">
-                        <textarea id="task" name="task" rows="3">{$aField['task']}</textarea>
+                        <textarea id="field_task" name="field_task" rows="3">{$aField['field_task']}</textarea>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="spent_time">Время факт.</label>
+                    <label class="control-label" for="field_spent_time">Время факт.</label>
                     <div class="controls">
-                        <input type="text" id="spent_time" name="spent_time" value="{$aField['spent_time']}">
+                        <input type="text" id="field_spent_time" name="field_spent_time" value="{$aField['field_spent_time']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="planned_time">Время план.</label>
+                    <label class="control-label" for="field_planned_time">Время план.</label>
                     <div class="controls">
-                        <input type="text" id="planned_time" name="planned_time" value="{$aField['planned_time']}">
+                        <input type="text" id="field_planned_time" name="field_planned_time" value="{$aField['field_planned_time']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="amount">Сумма</label>
+                    <label class="control-label" for="field_amount">Сумма</label>
                     <div class="controls">
-                        <input type="text" id="amount" name="amount" value="{$aField['amount']}">
+                        <input type="text" id="field_amount" name="field_amount" value="{$aField['field_amount']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="creation_date">Дата создания</label>
+                    <label class="control-label" for="field_creation_date">Дата создания</label>
                     <div class="controls">
-                        <input type="date" id="creation_date" name="creation_date" value="{$aField['creation_date']}">
+                        <input type="date" id="field_creation_date" name="field_creation_date" value="{$aField['field_creation_date']}">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="link">Ссылка</label>
+                    <label class="control-label" for="field_link">Ссылка</label>
                     <div class="controls">
-                        <input type="url" id="link" name="link" value="{$aField['link']}">
+                        <input type="url" id="field_link" name="field_link" value="{$aField['field_link']}">
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn" id="fieldSave" data-url="">Сохранить</button>
-                    <button type="button" class="btn" id="fieldDelete" data-url="{$sUrl}/delete">Удалить</button>
+                    <button type="button" class="btn green" id="fieldSave" data-url="{$sUrl}">Сохранить</button>
+                    <button type="button" class="btn red" id="fieldDelete" data-url="{$sUrl}">Удалить</button>
                 </div>
             </form>
         </div>

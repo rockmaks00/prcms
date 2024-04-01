@@ -19,8 +19,87 @@ class ComponentImportAdmin extends AbstractImport
 
 	protected function RegisterActions(): void
 	{
+		// страницы
 		$this->AddAction('default', 'ActionDefault');
+		$this->AddAction('edit', 'ActionEdit');
+
+		// ajax
 		$this->AddAction('upload', 'ActionUpload');
+		$this->AddAction('update', 'ActionUpdate');
+		$this->AddAction('delete', 'ActionDelete');
+	}
+
+	protected function ActionDefault(): void
+	{
+		$this->Template_Assign("bEditable", $this->AccessCheck("V"));
+		parent::ActionDefault();
+	}
+
+	protected function ActionEdit(): void
+	{
+		$iId = $this->aParams[0];
+		
+		$aField = $this->ComponentImport_Import_Get($iId);
+
+		if ($aField) {
+			$this->Template_AddJs($this->Template_GetHost() . "components/import/templates/edit.js");
+			$this->Template_Assign("aField", $aField);
+			$this->Template_Assign("sUrl", Config::get("host").'admin/content/'.$this->oNode->getId());
+			$this->SetTemplate("edit.tpl");
+		} else {
+			$this->NotFound();
+		}
+	}
+
+	protected function ActionUpdate(): void
+	{
+		if (!$this->AccessCheck("V")) {
+			$result['status'] = 403;
+		} else {
+			$iId = getRequest('field_id', 'post');
+
+			$aField = $this->ComponentImport_Import_Get($iId);
+
+			if (!empty($aField)) {
+				$oEntity = Engine::GetEntity('ComponentImport_Import', $aField, 'Field');
+
+				$oEntity->setGroup(getRequest('field_group', 'post'));
+				$oEntity->setTask(getRequest('field_task', 'post'));
+				$oEntity->setSpentTime(getRequest('field_spent_time', 'post'));
+				$oEntity->setPlannedTime(getRequest('field_planned_time', 'post'));
+				$oEntity->setAmount(getRequest('field_amount', 'post'));
+				$oEntity->setCreationDate(getRequest('field_creation_date', 'post'));
+				$oEntity->setLink(getRequest('field_link', 'post'));
+
+				$this->ComponentImport_Import_Update($oEntity);
+				$result['status'] = 200;
+			} else {
+				$result['status'] = 400;
+			}
+		}
+
+		http_response_code($result['status']);
+		echo json_encode($result);
+		exit;
+	}
+
+	protected function ActionDelete(): void
+	{
+		if (!$this->AccessCheck("V")) {
+			$result['status'] = 403;
+		} else {
+			$iId = getRequest('field_id', 'post');
+			$bDelete = $this->ComponentImport_Import_Delete($iId);
+			if ($bDelete) {
+				$result['status'] = 200;
+			} else {
+				$result['status'] = 400;
+			}
+		}
+
+		http_response_code($result['status']);
+		echo json_encode($result);
+		exit;
 	}
 
 	protected function ActionUpload(): void
@@ -62,7 +141,7 @@ class ComponentImportAdmin extends AbstractImport
 			$entity->setSpentTime($field[2]);
 			$entity->setPlannedTime($field[3]);
 			$entity->setAmount($field[4]);
-			$entity->setCreationDate($field[5]);
+			$entity->setFormattedCreationDate($field[5]);
 			$entity->setLink($field[6]);
 
 			$this->ComponentImport_Import_Add($entity);

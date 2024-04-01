@@ -1,6 +1,6 @@
 <div class="row-fluid">
     <label for="dateFilter">Фильтр по дате создания:</label>
-    <input type="date" id="dateFilter" {if $aFilters['creation_date']}value="{$aFilters['creation_date']}"{/if}>
+    <input type="date" id="dateFilter" {if $aFilters['field_creation_date']}value="{$aFilters['field_creation_date']}"{/if}>
 </div>
 <div class="row-fluid" style="margin-bottom: 5px;">
     <button type="button" class="btn" id="applyFilter">Применить</button>
@@ -23,16 +23,16 @@
             </thead>
             <tbody>
                 {foreach from=$aFields item="item"}
-                    <tr {if $bEditable} data-id="{$item['id']}" name="editable" {/if}>
-                        <td>{$item['id']}</td>
-                        <td>{$item['group']}</td>
-                        <td>{$item['task']}</td>
-                        <td>{$item['spent_time']}</td>
-                        <td>{$item['planned_time']}</td>
-                        <td>{$item['amount']}</td>
-                        <td>{$item['creation_date']}</td>
+                    <tr {if $bEditable} data-id="{$item['field_id']}" name="editable" {/if}>
+                        <td>{$item['field_id']}</td>
+                        <td>{$item['field_group']}</td>
+                        <td>{$item['field_task']}</td>
+                        <td>{$item['field_spent_time']}</td>
+                        <td>{$item['field_planned_time']}</td>
+                        <td>{$item['field_amount']}</td>
+                        <td>{$item['field_creation_date']}</td>
                         <td>
-                            <a href="{$item['link']}">Ссылка</a>
+                            <a href="{$item['field_link']}">Ссылка</a>
                         </td>
                     </tr>
                 {/foreach}

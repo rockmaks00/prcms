@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#applyFilter').click(function() {
         const dateFilter = $('#dateFilter').val();
         if(dateFilter) {
-            window.location.href = window.location.pathname + '?creation_date=' + dateFilter;
+            window.location.href = window.location.pathname + '?field_creation_date=' + dateFilter;
         }
     });
 
@@ -41,6 +41,6 @@ $(document).ready(function () {
     $('tr[name="editable"]').click(function () {
         const id = $(this).attr('data-id');
 
-        window.location.href = window.location.pathname + 'edit/' + id;
+        window.location.href = window.location.pathname + '/edit/' + id;
     });
 });

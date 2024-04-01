@@ -26,9 +26,9 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		$sTableName = self::tableName();
 		$aliases = [];
 
-		if (isset($filters['creation_date'])) {
-			$where = "WHERE `creation_date` = ?";
-			$aliases[] = $filters['creation_date'];
+		if (isset($filters['field_creation_date'])) {
+			$where = "WHERE `field_creation_date` = ?";
+			$aliases[] = $filters['field_creation_date'];
 		}
 
 		return [
@@ -43,15 +43,15 @@ class ComponentImport_ModuleImport_DbImport extends Db
 
 		if (!$this->oDb->CheckTableExists($sTableName)) {
 			$sql = "CREATE TABLE IF NOT EXISTS `{$sTableName}` (
-				`id` int(11) NOT NULL AUTO_INCREMENT,
-                `group` varchar(250) NOT NULL,
-                `task` varchar(250) NOT NULL,
-                `spent_time` float NOT NULL,
-                `planned_time` float NOT NULL,
-                `amount` int(11) NOT NULL,
-                `creation_date` date NOT NULL,
-                `link` varchar(250) NOT NULL,
-				PRIMARY KEY (`id`)
+				`field_id` int(11) NOT NULL AUTO_INCREMENT,
+                `field_group` varchar(250) NOT NULL,
+                `field_task` varchar(250) NOT NULL,
+                `field_spent_time` float NOT NULL,
+                `field_planned_time` float NOT NULL,
+                `field_amount` int(11) NOT NULL,
+                `field_creation_date` date NOT NULL,
+                `field_link` varchar(250) NOT NULL,
+				PRIMARY KEY (`field_id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
 			return $this->oDb->Query($sql);
@@ -60,7 +60,7 @@ class ComponentImport_ModuleImport_DbImport extends Db
 
 	public function Count(array $filters): int
 	{
-		$data = $this->BuildSelect("COUNT(id) AS count", $filters);
+		$data = $this->BuildSelect("COUNT(field_id) AS count", $filters);
 		$sql = $data['sql'];
 		$aliases = $data['aliases'];
 
@@ -83,13 +83,13 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		$sTableName = self::tableName();
 
 		$sql = "INSERT INTO `{$sTableName}` (
-				`group`,
-				`task`,
-				`spent_time`,
-				`planned_time`,
-				`amount`,
-				`creation_date`,
-				`link`
+				`field_group`,
+				`field_task`,
+				`field_spent_time`,
+				`field_planned_time`,
+				`field_amount`,
+				`field_creation_date`,
+				`field_link`
 			) 
 			VALUES(?, ?, ?, ?, ?, ?, ?)
 		";
@@ -111,14 +111,14 @@ class ComponentImport_ModuleImport_DbImport extends Db
 		$sTableName = self::tableName();
 
 		$sql = "UPDATE `{$sTableName}` SET 
-				`group`=?,
-				`task`=?,
-	            `spent_time`=?,
-	            `planned_time`=?,
-	            `amount`=?,
-	            `creation_date`=?,
-	            `link`=?,
-			WHERE id=?
+				`field_group`=?,
+				`field_task`=?,
+	            `field_spent_time`=?,
+	            `field_planned_time`=?,
+	            `field_amount`=?,
+	            `field_creation_date`=?,
+	            `field_link`=?
+			WHERE field_id=?
 		";
 
 		return $this->oDb->Query(
@@ -129,7 +129,8 @@ class ComponentImport_ModuleImport_DbImport extends Db
 			$oField->getPlannedTime(),
 			$oField->getAmount(),
 			$oField->getCreationDate(),
-			$oField->getLink()
+			$oField->getLink(),
+			$oField->getId()
 		);
 	}
 
@@ -149,7 +150,7 @@ class ComponentImport_ModuleImport_DbImport extends Db
 	public function Get(int $id)
 	{
 		$sTableName = self::tableName();
-		$sql = "SELECT * FROM {$sTableName} WHERE id=?";
+		$sql = "SELECT * FROM {$sTableName} WHERE field_id=?";
 
 		return $this->oDb->SelectRow($sql, $id);
 	}
